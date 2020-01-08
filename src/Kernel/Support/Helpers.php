@@ -118,3 +118,28 @@ function rsa_public_encrypt($content, $publicKey)
 
     return base64_encode($encrypted);
 }
+
+function getPddSign(array $params, $client_secret)
+{
+    //把boolean转为true 和 false
+    foreach ($params as $key=>$val){
+        if(is_bool($val)){
+            $params[$key] = $val?"true":"false";
+        }
+    }
+
+    //签名步骤一：按字典序排序参数
+    ksort($params);
+    $string = $this->toUrlParams($params);
+
+    //签名步骤二：在string首尾加上client_secret
+    $string = $client_secret . $string . $client_secret;
+
+    //签名步骤三：MD5加密
+    $string = md5($string);
+
+    //签名步骤四：所有字符转为大写
+    $result = strtoupper($string);
+
+    return $result;
+}

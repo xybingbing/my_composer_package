@@ -182,7 +182,7 @@ class BaseClient
         $respWellFormed = false;
         $respObject = array();
         if ("json" == $this->globalConfig['format']) {
-            $respObject = json_decode($response);
+            $respObject = json_decode($response, true);
             if (null !== $respObject) {
                 $respWellFormed = true;
                 $respObject = @current($respObject);

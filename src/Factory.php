@@ -6,7 +6,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace ETaobao;
+namespace BingBing;
 
 /**
  * Class Factory.
@@ -22,7 +22,7 @@ class Factory
     public static function make($name, array $config)
     {
         $namespace = Kernel\Support\Str::studly($name);
-        $application = "\\ETaobao\\{$namespace}\\Application";
+        $application = "\\BingBing\\{$namespace}\\Application";
 
         return new $application($config);
     }
